@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual Document Maker</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial,"Noto Sans Devanagari",sans-serif;
+    background:#f1f5f9;
+    color:#172033;
+}
+header{
+    background:#172554;
+    color:white;
+    padding:18px;
+    text-align:center;
+}
+header h1{margin:0;font-size:24px}
+header p{margin:6px 0 0;opacity:.85}
+
+.container{
+    max-width:1100px;
+    margin:25px auto;
+    padding:15px;
+}
+.card{
+    background:white;
+    border-radius:14px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+h2{margin-top:0}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+.field label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+input,select,textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:15px;
+}
+textarea{min-height:90px;resize:vertical}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:18px;
+}
+button{
+    border:0;
+    border-radius:8px;
+    padding:12px 18px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.generate{background:#2563eb;color:white}
+.print{background:#16a34a;color:white}
+.reset{background:#dc2626;color:white}
+button:hover{opacity:.9}
+
+.document{
+    background:white;
+    max-width:800px;
+    margin:auto;
+    min-height:900px;
+    padding:55px;
+    border:1px solid #ddd;
+}
+.doc-header{
+    text-align:center;
+    border-bottom:2px solid #111;
+    padding-bottom:15px;
+    margin-bottom:25px;
+}
+.doc-header h1{margin:0;font-size:25px}
+.doc-title{
+    text-align:center;
+    margin:25px 0;
+    text-decoration:underline;
+}
+.doc-body{
+    font-size:17px;
+    line-height:1.9;
+}
+.signature{
+    margin-top:80px;
+    display:flex;
+    justify-content:space-between;
+    text-align:center;
+}
+.hidden{display:none}
+
+@media(max-width:700px){
+    .grid{grid-template-columns:1fr}
+    .document{padding:25px;min-height:700px}
+    .signature{margin-top:50px}
+}
+
+@media print{
+    body{background:white}
+    header,.form-section,.buttons,.preview-title{
+        display:none!important;
+    }
+    .container{
+        margin:0;
+        padding:0;
+        max-width:none;
+    }
+    .card{
+        box-shadow:none;
+        padding:0;
+        margin:0;
+    }
+    .document{
+        border:0;
+        max-width:none;
+        min-height:auto;
+        padding:25mm 20mm;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Manual Document Maker</h1>
+    <p>Document बनाएं • Preview करें • Print / PDF करें</p>
+</header>
+
+<div class="container">
+
+<div class="card form-section">
+    <h2>📄 Document Details</h2>
+
+    <div class="grid">
+
+        <div class="field">
+            <label>Document Type</label>
+            <select id="docType">
+                <option value="application">आवेदन पत्र</option>
+                <option value="declaration">घोषणा पत्र</option>
+                <option value="certificate">प्रमाण-पत्र</option>
+                <option value="custom">Custom Document</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Document Number</label>
+            <input id="docNo" placeholder="DOC-001">
+        </div>
+
+        <div class="field">
+            <label>नाम</label>
+            <input id="name" placeholder="पूरा नाम">
+        </div>
+
+        <div class="field">
+            <label>पिता / पति का नाम</label>
+            <input id="father" placeholder="पिता / पति का नाम">
+        </div>
+
+        <div class="field">
+            <label>मोबाइल नंबर</label>
+            <input id="mobile" placeholder="10 अंकों का मोबाइल नंबर">
+        </div>
+
+        <div class="field">
+            <label>दिनांक</label>
+            <input id="date" type="date">
+        </div>
+
+        <div class="field" style="grid-column:1/-1">
+            <label>पूरा पता</label>
+            <textarea id="address" placeholder="गांव, पोस्ट, थाना, जिला, राज्य आदि"></textarea>
+        </div>
+
+        <div class="field" style="grid-column:1/-1">
+            <label>Document में लिखने वाला मुख्य विवरण</label>
+            <textarea id="details" placeholder="यहाँ अपना पूरा विवरण लिखें..."></textarea>
+        </div>
+
+    </div>
+
+    <div class="buttons">
+        <button class="generate" onclick="generateDocument()">
+            Generate Document
+        </button>
+
+        <button class="reset" onclick="resetForm()">
+            Reset
+        </button>
+    </div>
+</div>
+
+
+<div class="card">
+
+    <h2 class="preview-title">👁️ Document Preview</h2>
+
+    <div id="documentPreview" class="document">
+
+        <div class="doc-header">
+            <h1>MANUAL DOCUMENT MAKER</h1>
+            <p>Generated Document</p>
+        </div>
+
+        <h2 class="doc-title" id="previewTitle">
+            आवेदन पत्र
+        </h2>
+
+        <div class="doc-body">
+
+            <p>
+                <strong>Document No.:</strong>
+                <span id="previewDocNo">---</span>
+            </p>
+
+            <p>
+                <strong>नाम:</strong>
+                <span id="previewName">---</span>
+            </p>
+
+            <p>
+                <strong>पिता / पति का नाम:</strong>
+                <span id="previewFather">---</span>
+            </p>
+
+            <p>
+                <strong>मोबाइल:</strong>
+                <span id="previewMobile">---</span>
+            </p>
+
+            <p>
+                <strong>पता:</strong><br>
+                <span id="previewAddress">---</span>
+            </p>
+
+            <p style="margin-top:30px">
+                <strong>विवरण:</strong>
+            </p>
+
+            <p id="previewDetails">
+                ---
+            </p>
+
+        </div>
+
+        <div class="signature">
+
+            <div>
+                <p>दिनांक</p>
+                <strong id="previewDate">---</strong>
+            </div>
+
+            <div>
+                <p>हस्ताक्षर</p>
+                <br>
+                __________________
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="buttons">
+        <button class="print" onclick="printDocument()">
+            🖨️ Print / Save PDF
+        </button>
+    </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const $ = id => document.getElementById(id);
+
+function formatDate(dateValue){
+
+    if(!dateValue) return "---";
+
+    const date = new Date(dateValue);
+
+    return date.toLocaleDateString("hi-IN",{
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+    });
+}
+
+
+function generateDocument(){
+
+    const type = $("docType").value;
+
+    const titles = {
+        application:"आवेदन पत्र",
+        declaration:"घोषणा पत्र",
+        certificate:"प्रमाण-पत्र",
+        custom:"DOCUMENT"
+    };
+
+    $("previewTitle").innerText = titles[type];
+
+    $("previewDocNo").innerText =
+        $("docNo").value || "---";
+
+    $("previewName").innerText =
+        $("name").value || "---";
+
+    $("previewFather").innerText =
+        $("father").value || "---";
+
+    $("previewMobile").innerText =
+        $("mobile").value || "---";
+
+    $("previewAddress").innerText =
+        $("address").value || "---";
+
+    $("previewDetails").innerText =
+        $("details").value || "---";
+
+    $("previewDate").innerText =
+        formatDate($("date").value);
+
+    // Save latest document locally
+    localStorage.setItem(
+        "manualDocument",
+        JSON.stringify({
+            type:type,
+            docNo:$("docNo").value,
+            name:$("name").value,
+            father:$("father").value,
+            mobile:$("mobile").value,
+            date:$("date").value,
+            address:$("address").value,
+            details:$("details").value
+        })
+    );
+
+    document.querySelector(".preview-title")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+
+function printDocument(){
+
+    generateDocument();
+
+    setTimeout(()=>{
+        window.print();
+    },300);
+}
+
+
+function resetForm(){
+
+    $("docNo").value="";
+    $("name").value="";
+    $("father").value="";
+    $("mobile").value="";
+    $("date").value="";
+    $("address").value="";
+    $("details").value="";
+
+    $("previewDocNo").innerText="---";
+    $("previewName").innerText="---";
+    $("previewFather").innerText="---";
+    $("previewMobile").innerText="---";
+    $("previewAddress").innerText="---";
+    $("previewDetails").innerText="---";
+    $("previewDate").innerText="---";
+}
+
+
+function loadSavedDocument(){
+
+    const saved =
+        localStorage.getItem("manualDocument");
+
+    if(!saved) return;
+
+    try{
+
+        const data = JSON.parse(saved);
+
+        $("docType").value = data.type || "application";
+        $("docNo").value = data.docNo || "";
+        $("name").value = data.name || "";
+        $("father").value = data.father || "";
+        $("mobile").value = data.mobile || "";
+        $("date").value = data.date || "";
+        $("address").value = data.address || "";
+        $("details").value = data.details || "";
+
+        generateDocument();
+
+    }catch(e){
+        console.log("Saved document load error");
+    }
+}
+
+
+// Set today's date
+$("date").value =
+    new Date().toISOString().split("T")[0];
+
+
+// Load previous data
+loadSavedDocument();
+
+</script>
+
+</body>
+  </html>
