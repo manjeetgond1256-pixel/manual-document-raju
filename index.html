@@ -3,135 +3,657 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manual Document Maker</title>
+
+<title>My Service Portal</title>
 
 <style>
-*{box-sizing:border-box}
-body{
+*{
+    box-sizing:border-box;
     margin:0;
+    padding:0;
+}
+
+body{
     font-family:Arial,"Noto Sans Devanagari",sans-serif;
-    background:#f1f5f9;
-    color:#172033;
+    background:#f4f6f9;
+    color:#222;
 }
-header{
-    background:#172554;
-    color:white;
-    padding:18px;
+
+button,input,select,textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* ================= LOGIN ================= */
+
+#loginPage{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:linear-gradient(135deg,#0b4da2,#1677d2);
+}
+
+.loginBox{
+    width:100%;
+    max-width:390px;
+    background:#fff;
+    padding:30px 25px;
+    border-radius:20px;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.logoCircle{
+    width:70px;
+    height:70px;
+    margin:auto;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#0b4da2;
+    color:#fff;
+    font-size:30px;
+}
+
+.loginBox h1{
     text-align:center;
+    margin-top:15px;
+    color:#0b4da2;
+    font-size:25px;
 }
-header h1{margin:0;font-size:24px}
-header p{margin:6px 0 0;opacity:.85}
 
-.container{
-    max-width:1100px;
-    margin:25px auto;
-    padding:15px;
+.loginBox p{
+    text-align:center;
+    color:#777;
+    margin:7px 0 25px;
 }
-.card{
-    background:white;
-    border-radius:14px;
-    padding:22px;
+
+.inputGroup{
+    margin-bottom:15px;
+}
+
+.inputGroup label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.inputGroup input,
+.inputGroup select,
+.inputGroup textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #d9dfe7;
+    border-radius:9px;
+    outline:none;
+    background:#fff;
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus,
+.inputGroup textarea:focus{
+    border-color:#1677d2;
+}
+
+.loginBtn{
+    width:100%;
+    border:0;
+    padding:14px;
+    border-radius:9px;
+    background:#0b4da2;
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.demoLogin{
+    margin-top:15px;
+    padding:10px;
+    background:#f1f5fa;
+    border-radius:8px;
+    font-size:12px;
+}
+
+/* ================= APP ================= */
+
+#app{
+    display:none;
+}
+
+/* HEADER */
+
+.header{
+    height:65px;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.menuBtn{
+    border:0;
+    background:none;
+    font-size:27px;
+    color:#0b4da2;
+}
+
+.headerTitle{
+    color:#0b4da2;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.userCircle{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#0b4da2;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:-280px;
+    top:0;
+    width:270px;
+    height:100vh;
+    background:#0b4da2;
+    color:white;
+    z-index:100;
+    transition:.3s;
+    overflow-y:auto;
+}
+
+.sidebar.active{
+    left:0;
+}
+
+.sideLogo{
+    padding:25px 20px;
+    font-size:22px;
+    font-weight:bold;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.sideUser{
+    padding:18px 20px;
+    background:rgba(0,0,0,.1);
+}
+
+.sideUser small{
+    opacity:.75;
+}
+
+.navItem{
+    display:block;
+    padding:15px 20px;
+    color:white;
+    text-decoration:none;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.navItem:hover{
+    background:rgba(255,255,255,.12);
+}
+
+.closeMenu{
+    float:right;
+    border:0;
+    background:none;
+    color:white;
+    font-size:25px;
+}
+
+.overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:90;
+}
+
+.overlay.active{
+    display:block;
+}
+
+/* MAIN */
+
+.main{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+/* WELCOME */
+
+.welcome{
     margin-bottom:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
-h2{margin-top:0}
 
-.grid{
+.welcome h2{
+    color:#172033;
+    margin-bottom:5px;
+}
+
+.welcome p{
+    color:#777;
+}
+
+/* WALLET */
+
+.wallet{
+    background:linear-gradient(135deg,#0b4da2,#1677d2);
+    color:#fff;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(11,77,162,.25);
+    margin-bottom:20px;
+}
+
+.wallet small{
+    opacity:.8;
+}
+
+.walletAmount{
+    font-size:35px;
+    font-weight:bold;
+    margin:8px 0 18px;
+}
+
+.wallet button{
+    border:0;
+    padding:11px 18px;
+    border-radius:8px;
+    color:#0b4da2;
+    font-weight:bold;
+    background:#fff;
+}
+
+/* STAT CARDS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:#fff;
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.statIcon{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.stat h3{
+    font-size:25px;
+}
+
+.stat p{
+    color:#777;
+    margin-top:5px;
+}
+
+/* SECTION */
+
+.sectionTitle{
+    margin:25px 0 15px;
+    font-size:21px;
+}
+
+/* SERVICES */
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.service{
+    background:#fff;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+    transition:.2s;
+}
+
+.service:hover{
+    transform:translateY(-3px);
+}
+
+.serviceIcon{
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.service h3{
+    font-size:16px;
+    margin-bottom:7px;
+}
+
+.service p{
+    font-size:13px;
+    color:#777;
+    margin-bottom:12px;
+}
+
+.smallBtn{
+    border:0;
+    padding:9px 14px;
+    border-radius:7px;
+    background:#0b4da2;
+    color:white;
+}
+
+/* DOCUMENT FORM */
+
+.formCard{
+    background:#fff;
+    padding:22px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.formGrid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:15px;
 }
-.field label{
-    display:block;
-    font-weight:bold;
-    margin-bottom:6px;
-}
-input,select,textarea{
-    width:100%;
-    padding:12px;
-    border:1px solid #cbd5e1;
-    border-radius:8px;
-    font-size:15px;
-}
-textarea{min-height:90px;resize:vertical}
 
-.buttons{
+.full{
+    grid-column:1/-1;
+}
+
+.formActions{
     display:flex;
-    flex-wrap:wrap;
     gap:10px;
     margin-top:18px;
+    flex-wrap:wrap;
 }
-button{
-    border:0;
-    border-radius:8px;
-    padding:12px 18px;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-}
-.generate{background:#2563eb;color:white}
-.print{background:#16a34a;color:white}
-.reset{background:#dc2626;color:white}
-button:hover{opacity:.9}
 
-.document{
-    background:white;
-    max-width:800px;
-    margin:auto;
-    min-height:900px;
-    padding:55px;
-    border:1px solid #ddd;
+.primaryBtn{
+    border:0;
+    background:#0b4da2;
+    color:#fff;
+    padding:12px 20px;
+    border-radius:8px;
+    font-weight:bold;
 }
-.doc-header{
+
+.secondaryBtn{
+    border:0;
+    background:#e8edf4;
+    color:#222;
+    padding:12px 20px;
+    border-radius:8px;
+}
+
+/* DOCUMENT PREVIEW */
+
+.documentPreview{
+    background:#fff;
+    max-width:850px;
+    margin:20px auto;
+    padding:50px;
+    min-height:900px;
+    box-shadow:0 3px 15px rgba(0,0,0,.12);
+}
+
+.documentHeader{
     text-align:center;
-    border-bottom:2px solid #111;
+    border-bottom:2px solid #222;
     padding-bottom:15px;
     margin-bottom:25px;
 }
-.doc-header h1{margin:0;font-size:25px}
-.doc-title{
-    text-align:center;
-    margin:25px 0;
-    text-decoration:underline;
+
+.documentHeader h1{
+    font-size:25px;
 }
-.doc-body{
-    font-size:17px;
-    line-height:1.9;
+
+.documentHeader p{
+    margin-top:5px;
 }
-.signature{
+
+.documentBody{
+    line-height:2;
+    font-size:16px;
+}
+
+.signatureArea{
     margin-top:80px;
     display:flex;
     justify-content:space-between;
-    text-align:center;
 }
-.hidden{display:none}
 
-@media(max-width:700px){
-    .grid{grid-template-columns:1fr}
-    .document{padding:25px;min-height:700px}
-    .signature{margin-top:50px}
+.signature{
+    text-align:center;
+    width:180px;
+    border-top:1px solid #222;
+    padding-top:5px;
 }
+
+/* TABLE */
+
+.tableCard{
+    background:#fff;
+    padding:20px;
+    border-radius:15px;
+    overflow:auto;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:13px 10px;
+    border-bottom:1px solid #eee;
+    text-align:left;
+    white-space:nowrap;
+}
+
+th{
+    background:#f3f6fa;
+}
+
+/* PROFILE */
+
+.profileCard{
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    max-width:650px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.profileTop{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.bigUser{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:#0b4da2;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+/* NOTICE */
+
+.notice{
+    background:#fff8df;
+    border-left:4px solid #e4b400;
+    padding:14px;
+    border-radius:7px;
+    margin-bottom:20px;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%) translateY(100px);
+    background:#222;
+    color:#fff;
+    padding:13px 20px;
+    border-radius:8px;
+    z-index:500;
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateX(-50%) translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .services{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .main{
+        padding:12px;
+    }
+
+    .header{
+        padding:0 12px;
+    }
+
+    .headerTitle{
+        font-size:17px;
+    }
+
+    .stats{
+        gap:10px;
+    }
+
+    .stat{
+        padding:15px;
+    }
+
+    .stat h3{
+        font-size:21px;
+    }
+
+    .services{
+        gap:10px;
+    }
+
+    .service{
+        padding:15px 8px;
+    }
+
+    .serviceIcon{
+        font-size:32px;
+    }
+
+    .formGrid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .documentPreview{
+        padding:25px 18px;
+        min-height:700px;
+    }
+
+    .signatureArea{
+        margin-top:50px;
+    }
+
+}
+
+/* PRINT */
 
 @media print{
-    body{background:white}
-    header,.form-section,.buttons,.preview-title{
-        display:none!important;
+
+    body{
+        background:#fff;
     }
-    .container{
-        margin:0;
+
+    .header,
+    .sidebar,
+    .overlay,
+    .formCard,
+    .sectionTitle,
+    .noPrint{
+        display:none !important;
+    }
+
+    .main{
         padding:0;
         max-width:none;
     }
-    .card{
-        box-shadow:none;
-        padding:0;
-        margin:0;
+
+    .page{
+        display:none !important;
     }
-    .document{
-        border:0;
+
+    #previewPage{
+        display:block !important;
+    }
+
+    .documentPreview{
+        box-shadow:none;
+        margin:0;
         max-width:none;
         min-height:auto;
-        padding:25mm 20mm;
+        padding:20px;
     }
 }
 </style>
@@ -139,191 +661,433 @@ button:hover{opacity:.9}
 
 <body>
 
-<header>
-    <h1>Manual Document Maker</h1>
-    <p>Document बनाएं • Preview करें • Print / PDF करें</p>
-</header>
+<!-- ================= LOGIN ================= -->
 
-<div class="container">
+<div id="loginPage">
 
-<div class="card form-section">
-    <h2>📄 Document Details</h2>
+    <div class="loginBox">
 
-    <div class="grid">
+        <div class="logoCircle">MS</div>
 
-        <div class="field">
-            <label>Document Type</label>
-            <select id="docType">
-                <option value="application">आवेदन पत्र</option>
-                <option value="declaration">घोषणा पत्र</option>
-                <option value="certificate">प्रमाण-पत्र</option>
-                <option value="custom">Custom Document</option>
-            </select>
+        <h1>My Service Portal</h1>
+
+        <p>Professional Online Service Dashboard</p>
+
+        <div class="inputGroup">
+            <label>Username</label>
+            <input
+                type="text"
+                id="loginUsername"
+                placeholder="Enter username"
+            >
         </div>
 
-        <div class="field">
-            <label>Document Number</label>
-            <input id="docNo" placeholder="DOC-001">
+        <div class="inputGroup">
+            <label>Password</label>
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter password"
+            >
         </div>
 
-        <div class="field">
-            <label>नाम</label>
-            <input id="name" placeholder="पूरा नाम">
-        </div>
+        <button class="loginBtn" onclick="login()">
+            Login
+        </button>
 
-        <div class="field">
-            <label>पिता / पति का नाम</label>
-            <input id="father" placeholder="पिता / पति का नाम">
-        </div>
-
-        <div class="field">
-            <label>मोबाइल नंबर</label>
-            <input id="mobile" placeholder="10 अंकों का मोबाइल नंबर">
-        </div>
-
-        <div class="field">
-            <label>दिनांक</label>
-            <input id="date" type="date">
-        </div>
-
-        <div class="field" style="grid-column:1/-1">
-            <label>पूरा पता</label>
-            <textarea id="address" placeholder="गांव, पोस्ट, थाना, जिला, राज्य आदि"></textarea>
-        </div>
-
-        <div class="field" style="grid-column:1/-1">
-            <label>Document में लिखने वाला मुख्य विवरण</label>
-            <textarea id="details" placeholder="यहाँ अपना पूरा विवरण लिखें..."></textarea>
+        <div class="demoLogin">
+            <b>Demo Login</b><br>
+            Username: admin<br>
+            Password: 1234
         </div>
 
     </div>
 
-    <div class="buttons">
-        <button class="generate" onclick="generateDocument()">
-            Generate Document
-        </button>
-
-        <button class="reset" onclick="resetForm()">
-            Reset
-        </button>
-    </div>
 </div>
 
 
-<div class="card">
+<!-- ================= APP ================= -->
 
-    <h2 class="preview-title">👁️ Document Preview</h2>
+<div id="app">
 
-    <div id="documentPreview" class="document">
+    <!-- HEADER -->
 
-        <div class="doc-header">
-            <h1>MANUAL DOCUMENT MAKER</h1>
-            <p>Generated Document</p>
+    <header class="header">
+
+        <button class="menuBtn" onclick="openMenu()">
+            ☰
+        </button>
+
+        <div class="headerTitle">
+            MY SERVICE PORTAL
         </div>
 
-        <h2 class="doc-title" id="previewTitle">
-            आवेदन पत्र
-        </h2>
+        <div class="userCircle">
+            A
+        </div>
 
-        <div class="doc-body">
+    </header>
 
-            <p>
-                <strong>Document No.:</strong>
-                <span id="previewDocNo">---</span>
-            </p>
 
-            <p>
-                <strong>नाम:</strong>
-                <span id="previewName">---</span>
-            </p>
+    <!-- SIDEBAR -->
 
-            <p>
-                <strong>पिता / पति का नाम:</strong>
-                <span id="previewFather">---</span>
-            </p>
+    <aside class="sidebar" id="sidebar">
 
-            <p>
-                <strong>मोबाइल:</strong>
-                <span id="previewMobile">---</span>
-            </p>
+        <div class="sideLogo">
 
-            <p>
-                <strong>पता:</strong><br>
-                <span id="previewAddress">---</span>
-            </p>
+            MY SERVICE
 
-            <p style="margin-top:30px">
-                <strong>विवरण:</strong>
-            </p>
-
-            <p id="previewDetails">
-                ---
-            </p>
+            <button
+                class="closeMenu"
+                onclick="closeMenu()"
+            >
+                ×
+            </button>
 
         </div>
 
-        <div class="signature">
+        <div class="sideUser">
+            <b>Admin User</b><br>
+            <small>Administrator</small>
+        </div>
 
-            <div>
-                <p>दिनांक</p>
-                <strong id="previewDate">---</strong>
+        <a
+            class="navItem"
+            href="#"
+            onclick="showPage('homePage')"
+        >
+            🏠 Dashboard
+        </a>
+
+        <a
+            class="navItem"
+            href="#"
+            onclick="showPage('servicesPage')"
+        >
+            📋 Services
+        </a>
+
+        <a
+            class="navItem"
+            href="#"
+            onclick="showPage('documentPage')"
+        >
+            📝 Document Maker
+        </a>
+
+        <a
+            class="navItem"
+            href="#"
+            onclick="showPage('transactionsPage')"
+        >
+            💳 Transactions
+        </a>
+
+        <a
+            class="navItem"
+            href="#"
+            onclick="showPage('profilePage')"
+        >
+            👤 My Profile
+        </a>
+
+        <a
+            class="navItem"
+            href="#"
+            onclick="logout()"
+        >
+            🚪 Logout
+        </a>
+
+    </aside>
+
+    <div
+        class="overlay"
+        id="overlay"
+        onclick="closeMenu()"
+    ></div>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+        <!-- ================= HOME ================= -->
+
+        <section
+            class="page active"
+            id="homePage"
+        >
+
+            <div class="welcome">
+
+                <h2>Welcome, Admin 👋</h2>
+
+                <p>
+                    आपके Service Portal में आपका स्वागत है।
+                </p>
+
             </div>
 
-            <div>
-                <p>हस्ताक्षर</p>
-                <br>
-                __________________
+
+            <div class="wallet">
+
+                <small>Available Wallet Balance</small>
+
+                <div class="walletAmount">
+                    ₹<span id="walletBalance">2500</span>
+                </div>
+
+                <button onclick="addMoney()">
+                    + Add Money
+                </button>
+
             </div>
 
-        </div>
 
-    </div>
+            <div class="stats">
 
-    <div class="buttons">
-        <button class="print" onclick="printDocument()">
-            🖨️ Print / Save PDF
-        </button>
-    </div>
+                <div class="stat">
+                    <div class="statIcon">📋</div>
+                    <h3 id="totalApplications">25</h3>
+                    <p>Total Applications</p>
+                </div>
 
-</div>
+                <div class="stat">
+                    <div class="statIcon">✅</div>
+                    <h3>18</h3>
+                    <p>Completed</p>
+                </div>
 
-</div>
+                <div class="stat">
+                    <div class="statIcon">⏳</div>
+                    <h3>5</h3>
+                    <p>Pending</p>
+                </div>
 
+                <div class="stat">
+                    <div class="statIcon">❌</div>
+                    <h3>2</h3>
+                    <p>Rejected</p>
+                </div>
 
-<script>
-
-const $ = id => document.getElementById(id);
-
-function formatDate(dateValue){
-
-    if(!dateValue) return "---";
-
-    const date = new Date(dateValue);
-
-    return date.toLocaleDateString("hi-IN",{
-        day:"2-digit",
-        month:"2-digit",
-        year:"numeric"
-    });
-}
+            </div>
 
 
-function generateDocument(){
+            <h2 class="sectionTitle">
+                Popular Services
+            </h2>
 
-    const type = $("docType").value;
 
-    const titles = {
-        application:"आवेदन पत्र",
-        declaration:"घोषणा पत्र",
-        certificate:"प्रमाण-पत्र",
-        custom:"DOCUMENT"
-    };
+            <div class="services">
 
-    $("previewTitle").innerText = titles[type];
+                <div class="service">
+                    <div class="serviceIcon">🪪</div>
+                    <h3>Aadhaar Document</h3>
+                    <p>Create / Print Document</p>
+                    <button
+                        class="smallBtn"
+                        onclick="openDocument('Aadhaar Document')"
+                    >
+                        Open
+                    </button>
+                </div>
 
-    $("previewDocNo").innerText =
-        $("docNo").value || "---";
 
+                <div class="service">
+                    <div class="serviceIcon">💳</div>
+                    <h3>PAN Card</h3>
+                    <p>Application Document</p>
+                    <button
+                        class="smallBtn"
+                        onclick="openDocument('PAN Card')"
+                    >
+                        Open
+                    </button>
+                </div>
+
+
+                <div class="service">
+                    <div class="serviceIcon">📜</div>
+                    <h3>Income Certificate</h3>
+                    <p>Document Maker</p>
+                    <button
+                        class="smallBtn"
+                        onclick="openDocument('Income Certificate')"
+                    >
+                        Open
+                    </button>
+                </div>
+
+
+                <div class="service">
+                    <div class="serviceIcon">🏠</div>
+                    <h3>Residence Certificate</h3>
+                    <p>Document Maker</p>
+                    <button
+                        class="smallBtn"
+                        onclick="openDocument('Residence Certificate')"
+                    >
+                        Open
+                    </button>
+                </div>
+
+
+                <div class="service">
+                    <div class="serviceIcon">📜</div>
+                    <h3>Caste Certificate</h3>
+                    <p>Document Maker</p>
+                    <button
+                        class="smallBtn"
+                        onclick="openDocument('Caste Certificate')"
+                    >
+                        Open
+                    </button>
+                </div>
+
+
+                <div class="service">
+                    <div class="serviceIcon">📝</div>
+                    <h3>Other Document</h3>
+                    <p>Create Document</p>
+                    <button
+                        class="smallBtn"
+                        onclick="openDocument('Other Document')"
+                    >
+                        Open
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SERVICES ================= -->
+
+        <section
+            class="page"
+            id="servicesPage"
+        >
+
+            <h2 class="sectionTitle">
+                All Services
+            </h2>
+
+            <div class="services">
+
+                <div class="service">
+                    <div class="serviceIcon">🪪</div>
+                    <h3>Aadhaar Document</h3>
+                    <p>Document Maker</p>
+                    <button
+                        class="smallBtn"
+                        onclick="openDocument('Aadhaar Document')"
+                    >
+                        Create
+                    </button>
+                </div>
+
+                <div class="service">
+                    <div class="serviceIcon">💳</div>
+                    <h3>PAN Card</h3>
+                    <p>Application Document</p>
+                    <button
+                        class="smallBtn"
+                        onclick="openDocument('PAN Card')"
+                    >
+                        Create
+                    </button>
+                </div>
+
+                <div class="service">
+                    <div class="serviceIcon">💰</div>
+                    <h3>Income Certificate</h3>
+                    <p>Certificate Document</p>
+                    <button
+                        class="smallBtn"
+                        onclick="openDocument('Income Certificate')"
+                    >
+                        Create
+                    </button>
+                </div>
+
+                <div class="service">
+                    <div class="serviceIcon">🏠</div>
+                    <h3>Residence Certificate</h3>
+                    <p>Residence Document</p>
+                    <button
+                        class="smallBtn"
+                        onclick="openDocument('Residence Certificate')"
+                    >
+                        Create
+                    </button>
+                </div>
+
+                <div class="service">
+                    <div class="serviceIcon">📜</div>
+                    <h3>Caste Certificate</h3>
+                    <p>Caste Document</p>
+                    <button
+                        class="smallBtn"
+                        onclick="openDocument('Caste Certificate')"
+                    >
+                        Create
+                    </button>
+                </div>
+
+                <div class="service">
+                    <div class="serviceIcon">🖨️</div>
+                    <h3>Print Service</h3>
+                    <p>Print / PDF</p>
+                    <button
+                        class="smallBtn"
+                        onclick="showToast('Print service ready')"
+                    >
+                        Open
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= DOCUMENT MAKER ================= -->
+
+        <section
+            class="page"
+            id="documentPage"
+        >
+
+            <h2 class="sectionTitle">
+                Document Maker
+            </h2>
+
+
+            <div class="notice">
+                <b>Note:</b>
+                नीचे जानकारी भरें और Generate Document दबाएँ।
+            </div>
+
+
+            <div class="formCard">
+
+                <div class="formGrid">
+
+                    <div class="inputGroup">
+                        <label>Document Type</label>
+
+                        <select id="documentType">
+
+                            <option>
+                                General Application
+                            </option>
+
+                            <option>
+                                Aadhaar Document
+          
     $("previewName").innerText =
         $("name").value || "---";
 
