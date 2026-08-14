@@ -3,112 +3,1312 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>My Service Portal</title>
 
 <style>
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-font-family:Arial,"Noto Sans Devanagari",sans-serif;
-background:#f4f7fb;
-color:#1f2937;
+  font-family:Arial,"Noto Sans Devanagari",sans-serif;
+  background:#f4f7fb;
+  color:#1f2937;
 }
 
 button,input,textarea,select{
-font-family:inherit;
+  font-family:inherit;
 }
 
 /* LOGIN */
-
 #loginPage{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-background:linear-gradient(135deg,#0757b8,#1677d2);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:linear-gradient(135deg,#0757b8,#1677d2);
 }
 
 .login-box{
-width:100%;
-max-width:400px;
-background:white;
-padding:32px 25px;
-border-radius:20px;
-box-shadow:0 20px 60px rgba(0,0,0,.25);
+  width:100%;
+  max-width:400px;
+  background:white;
+  padding:32px 25px;
+  border-radius:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
 }
 
 .logo{
-width:70px;
-height:70px;
-margin:auto;
-border-radius:50%;
-background:#0757b8;
-color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:27px;
-font-weight:bold;
-overflow:hidden;
-}
-
-.logo img{
-width:100%;
-height:100%;
-object-fit:cover;
-display:none;
+  width:70px;
+  height:70px;
+  margin:auto;
+  border-radius:50%;
+  background:#0757b8;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+  font-weight:bold;
 }
 
 .login-box h1{
-text-align:center;
-color:#0757b8;
-margin-top:15px;
-font-size:25px;
+  text-align:center;
+  color:#0757b8;
+  margin-top:15px;
+  font-size:25px;
 }
 
 .login-box p{
-text-align:center;
-color:#777;
-margin:8px 0 25px;
+  text-align:center;
+  color:#777;
+  margin:8px 0 25px;
 }
 
 .form-group{
-margin-bottom:16px;
+  margin-bottom:16px;
 }
 
 .form-group label{
-display:block;
-font-weight:bold;
-margin-bottom:7px;
-font-size:14px;
+  display:block;
+  font-weight:bold;
+  margin-bottom:7px;
+  font-size:14px;
 }
 
 input,textarea,select{
-width:100%;
-padding:12px;
-border:1px solid #d5dce5;
-border-radius:8px;
-font-size:15px;
-outline:none;
-background:white;
+  width:100%;
+  padding:12px;
+  border:1px solid #d5dce5;
+  border-radius:8px;
+  font-size:15px;
+  outline:none;
+  background:white;
 }
 
-input:focus,
-textarea:focus,
-select:focus{
-border-color:#0757b8;
+input:focus,textarea:focus,select:focus{
+  border-color:#0757b8;
+}
+
+.login-btn{
+  width:100%;
+  border:0;
+  padding:14px;
+  border-radius:8px;
+  background:#0757b8;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.demo{
+  margin-top:14px;
+  background:#eef3f9;
+  padding:12px;
+  border-radius:8px;
+  font-size:13px;
+  color:#555;
+}
+
+.error{
+  display:none;
+  color:#dc2626;
+  background:#fee2e2;
+  padding:10px;
+  border-radius:7px;
+  margin-bottom:15px;
+  font-size:14px;
+}
+
+/* APP */
+#app{
+  display:none;
+  min-height:100vh;
+}
+
+.topbar{
+  height:65px;
+  background:#0757b8;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.brand{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.menu-btn{
+  display:none;
+  background:none;
+  border:0;
+  color:white;
+  font-size:25px;
+}
+
+.logout{
+  background:white;
+  color:#0757b8;
+  border:0;
+  padding:9px 15px;
+  border-radius:7px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.layout{
+  display:flex;
+  min-height:calc(100vh - 65px);
+}
+
+.sidebar{
+  width:240px;
+  background:white;
+  border-right:1px solid #e1e6ed;
+  padding:20px 12px;
+}
+
+.sidebar-title{
+  color:#888;
+  font-size:12px;
+  margin:10px 12px;
+  text-transform:uppercase;
+}
+
+.nav-btn{
+  width:100%;
+  border:0;
+  background:transparent;
+  padding:13px 14px;
+  text-align:left;
+  border-radius:8px;
+  margin-bottom:5px;
+  cursor:pointer;
+  font-size:15px;
+  color:#374151;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+  background:#e8f1ff;
+  color:#0757b8;
+  font-weight:bold;
+}
+
+.content{
+  flex:1;
+  padding:25px;
+  max-width:1400px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.page-title{
+  font-size:25px;
+  margin-bottom:5px;
+}
+
+.page-subtitle{
+  color:#777;
+  margin-bottom:22px;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:25px;
+}
+
+.card{
+  background:white;
+  border-radius:12px;
+  padding:20px;
+  border:1px solid #e5e9ef;
+  box-shadow:0 3px 12px rgba(0,0,0,.04);
+}
+
+.stat-icon{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.stat-title{
+  color:#777;
+  font-size:14px;
+}
+
+.stat-value{
+  font-size:25px;
+  font-weight:bold;
+  margin-top:7px;
+  color:#0757b8;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+}
+
+/* SERVICES */
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.service-card{
+  background:white;
+  border:1px solid #e2e7ee;
+  padding:20px;
+  border-radius:12px;
+  transition:.2s;
+}
+
+.service-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 7px 20px rgba(0,0,0,.08);
+}
+
+.service-icon{
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+.service-card h3{
+  margin-bottom:7px;
+}
+
+.service-card p{
+  color:#777;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.service-btn{
+  margin-top:15px;
+  border:0;
+  background:#0757b8;
+  color:white;
+  padding:9px 14px;
+  border-radius:7px;
+  cursor:pointer;
+}
+
+/* TABLE */
+.table-box{
+  background:white;
+  border-radius:12px;
+  padding:20px;
+  border:1px solid #e5e9ef;
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:13px;
+  text-align:left;
+  border-bottom:1px solid #eee;
+  font-size:14px;
+}
+
+th{
+  background:#f7f9fc;
+}
+
+.badge{
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.success{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.pending{
+  background:#fef3c7;
+  color:#a16207;
+}
+
+/* DOCUMENT */
+.document-box{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  border:1px solid #e5e9ef;
+}
+
+.doc-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
 }
 
 textarea{
-min-height:120px;
-resize:vertical;
+  min-height:120px;
+  resize:vertical;
 }
+
+.action-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.action-buttons button{
+  border:0;
+  padding:12px 18px;
+  border-radius:7px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.primary{
+  background:#0757b8;
+  color:white;
+}
+
+.secondary{
+  background:#64748b;
+  color:white;
+}
+
+.green{
+  background:#15803d;
+  color:white;
+}
+
+/* REFERENCE FORM */
+.reference-form{
+  margin-top:20px;
+}
+
+.photo-upload{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:15px;
+}
+
+.upload-box{
+  border:1px dashed #aeb8c5;
+  border-radius:10px;
+  padding:15px;
+  background:#fafcff;
+}
+
+.upload-preview{
+  width:110px;
+  height:125px;
+  object-fit:cover;
+  border:1px solid #ddd;
+  margin-top:10px;
+  display:none;
+}
+
+.sign-preview{
+  width:180px;
+  height:70px;
+  object-fit:contain;
+  border:1px solid #ddd;
+  margin-top:10px;
+  display:none;
+}
+
+.logo-preview{
+  width:90px;
+  height:70px;
+  object-fit:contain;
+  border:1px solid #ddd;
+  margin-top:10px;
+  display:none;
+}
+
+/* REFERENCE PRINT */
+#printArea{
+  display:none;
+}
+
+.reference-card{
+  width:800px;
+  max-width:100%;
+  margin:25px auto;
+  background:white;
+  border:2px solid #333;
+  padding:25px;
+  position:relative;
+  overflow:hidden;
+}
+
+.reference-card:after{
+  content:"REFERENCE ONLY • NOT AN OFFICIAL ID";
+  position:absolute;
+  left:50%;
+  top:52%;
+  transform:translate(-50%,-50%) rotate(-25deg);
+  font-size:35px;
+  font-weight:bold;
+  color:rgba(200,0,0,.10);
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+.ref-header{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:15px;
+  border-bottom:2px solid #222;
+  padding-bottom:15px;
+  margin-bottom:18px;
+}
+
+.ref-logo{
+  width:70px;
+  height:55px;
+  object-fit:contain;
+  display:none;
+}
+
+.ref-header h2{
+  font-size:22px;
+  text-align:center;
+}
+
+.ref-warning{
+  text-align:center;
+  color:#b91c1c;
+  font-weight:bold;
+  font-size:13px;
+  margin-bottom:18px;
+}
+
+.ref-body{
+  display:grid;
+  grid-template-columns:1fr 135px;
+  gap:25px;
+}
+
+.ref-info{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  row-gap:12px;
+  font-size:15px;
+}
+
+.ref-info b{
+  color:#374151;
+}
+
+.ref-photo{
+  width:120px;
+  height:145px;
+  object-fit:cover;
+  border:1px solid #777;
+  display:none;
+}
+
+.ref-number{
+  margin-top:25px;
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+  letter-spacing:3px;
+  border-top:1px solid #aaa;
+  padding-top:15px;
+}
+
+.ref-sign-row{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:25px;
+}
+
+.ref-sign{
+  width:150px;
+  max-height:60px;
+  object-fit:contain;
+  display:none;
+}
+
+.ref-footer{
+  margin-top:25px;
+  padding-top:12px;
+  border-top:1px solid #aaa;
+  text-align:center;
+  font-size:11px;
+  color:#555;
+  line-height:1.6;
+}
+
+/* TOAST */
+#toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#111827;
+  color:white;
+  padding:13px 18px;
+  border-radius:8px;
+  display:none;
+  z-index:9999;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+.cards{
+  grid-template-columns:repeat(2,1fr);
+}
+
+.service-grid{
+  grid-template-columns:repeat(2,1fr);
+}
+
+.grid{
+  grid-template-columns:1fr;
+}
+
+.photo-upload{
+  grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:700px){
+
+.topbar{
+  padding:0 12px;
+}
+
+.menu-btn{
+  display:block;
+}
+
+.brand{
+  font-size:17px;
+}
+
+.sidebar{
+  position:fixed;
+  left:-260px;
+  top:65px;
+  bottom:0;
+  z-index:90;
+  transition:.25s;
+  box-shadow:5px 0 20px rgba(0,0,0,.15);
+}
+
+.sidebar.open{
+  left:0;
+}
+
+.content{
+  padding:16px;
+}
+
+.cards{
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.card{
+  padding:15px;
+}
+
+.stat-value{
+  font-size:20px;
+}
+
+.service-grid{
+  grid-template-columns:1fr;
+}
+
+.doc-grid{
+  grid-template-columns:1fr;
+}
+
+.logout{
+  padding:8px 10px;
+}
+
+.reference-card{
+  width:100%;
+  padding:15px;
+}
+
+.ref-body{
+  grid-template-columns:1fr;
+}
+
+.ref-info{
+  grid-template-columns:120px 1fr;
+  font-size:13px;
+}
+
+.ref-photo{
+  margin:auto;
+}
+
+.ref-number{
+  font-size:18px;
+  letter-spacing:2px;
+}
+
+}
+
+/* PRINT */
+@media print{
+
+body{
+  background:white;
+}
+
+body *{
+  visibility:hidden !important;
+}
+
+#printArea,
+#printArea *{
+  visibility:visible !important;
+}
+
+#printArea{
+  display:block !important;
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  background:white;
+}
+
+.reference-card{
+  width:100%;
+  max-width:800px;
+  margin:0 auto;
+  box-shadow:none;
+}
+
+.no-print{
+  display:none !important;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage">
+
+  <div class="login-box">
+
+    <div class="logo">MS</div>
+
+    <h1>My Service Portal</h1>
+
+    <p>Professional Online Service Dashboard</p>
+
+    <div id="loginError" class="error">
+      Username या Password गलत है।
+    </div>
+
+    <form id="loginForm">
+
+      <div class="form-group">
+        <label>Username</label>
+        <input
+          type="text"
+          id="username"
+          placeholder="Enter username"
+          autocomplete="username"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter password"
+          autocomplete="current-password"
+          required>
+      </div>
+
+      <button type="submit" class="login-btn">
+        Login
+      </button>
+
+    </form>
+
+    <div class="demo">
+      <b>Demo Login</b><br>
+      Username: admin<br>
+      Password: 1234
+    </div>
+
+  </div>
+</div>
+
+
+<!-- APP -->
+<div id="app">
+
+<header class="topbar">
+
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+  <div class="brand">
+    My Service Portal
+  </div>
+
+  <button class="logout" onclick="logout()">
+    Logout
+  </button>
+
+</header>
+
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+  <div class="sidebar-title">
+    Main Menu
+  </div>
+
+  <button class="nav-btn active"
+    onclick="showPage('dashboard',this)">
+    🏠 Dashboard
+  </button>
+
+  <button class="nav-btn"
+    onclick="showPage('services',this)">
+    📋 Services
+  </button>
+
+  <button class="nav-btn"
+    onclick="showPage('documents',this)">
+    📝 Document Maker
+  </button>
+
+  <button class="nav-btn"
+    onclick="showPage('wallet',this)">
+    💰 Wallet
+  </button>
+
+  <button class="nav-btn"
+    onclick="showPage('transactions',this)">
+    💳 Transactions
+  </button>
+
+  <div class="sidebar-title">
+    Account
+  </div>
+
+  <button class="nav-btn"
+    onclick="showPage('profile',this)">
+    👤 Profile
+  </button>
+
+  <button class="nav-btn"
+    onclick="logout()">
+    🚪 Logout
+  </button>
+
+</aside>
+
+
+<!-- CONTENT -->
+<main class="content">
+
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="page active">
+
+  <h1 class="page-title">Dashboard</h1>
+
+  <p class="page-subtitle">
+    Welcome back, <b>Admin</b>
+  </p>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="stat-icon">💰</div>
+      <div class="stat-title">Wallet Balance</div>
+      <div class="stat-value" id="balance">₹1,250</div>
+    </div>
+
+    <div class="card">
+      <div class="stat-icon">📋</div>
+      <div class="stat-title">Total Services</div>
+      <div class="stat-value">12</div>
+    </div>
+
+    <div class="card">
+      <div class="stat-icon">📝</div>
+      <div class="stat-title">Documents</div>
+      <div class="stat-value">28</div>
+    </div>
+
+    <div class="card">
+      <div class="stat-icon">💳</div>
+      <div class="stat-title">Transactions</div>
+      <div class="stat-value">35</div>
+    </div>
+
+  </div>
+
+
+  <div class="grid">
+
+    <div class="table-box">
+
+      <h2 style="margin-bottom:15px">
+        Recent Transactions
+      </h2>
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Aadhaar Reference Print</td>
+            <td>14 Aug 2026</td>
+            <td>₹50</td>
+            <td>
+              <span class="badge success">Success</span>
+            </td>
+          </tr>
+
+          <tr>
+            <td>PAN Card</td>
+            <td>13 Aug 2026</td>
+            <td>₹110</td>
+            <td>
+              <span class="badge success">Success</span>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Document Maker</td>
+            <td>12 Aug 2026</td>
+            <td>₹30</td>
+            <td>
+              <span class="badge pending">Pending</span>
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>Quick Actions</h2>
+
+      <button class="nav-btn"
+        onclick="openDocument()">
+        📝 Create Document
+      </button>
+
+      <button class="nav-btn"
+        onclick="openAadhaar()">
+        🪪 Aadhaar Reference Print
+      </button>
+
+      <button class="nav-btn"
+        onclick="addMoney()">
+        💰 Add Money
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SERVICES -->
+<section id="services" class="page">
+
+  <h1 class="page-title">Services</h1>
+
+  <p class="page-subtitle">
+    Available online services
+  </p>
+
+  <div class="service-grid">
+
+    <div class="service-card">
+
+      <div class="service-icon">🪪</div>
+
+      <h3>Aadhaar Service</h3>
+
+      <p>
+        Aadhaar details / reference print तैयार करें।
+      </p>
+
+      <button class="service-btn"
+        onclick="openAadhaar()">
+        Open Service
+      </button>
+
+    </div>
+
+
+    <div class="service-card">
+
+      <div class="service-icon">💳</div>
+
+      <h3>PAN Card</h3>
+
+      <p>
+        PAN application/document format.
+      </p>
+
+      <button class="service-btn"
+        onclick="serviceMessage('PAN Card')">
+        Open Service
+      </button>
+
+    </div>
+
+
+    <div class="service-card">
+
+      <div class="service-icon">📄</div>
+
+      <h3>Document Maker</h3>
+
+      <p>
+        सामान्य documents बनाएं और print करें।
+      </p>
+
+      <button class="service-btn"
+        onclick="openDocument()">
+        Create
+      </button>
+
+    </div>
+
+
+    <div class="service-card">
+
+      <div class="service-icon">🖨️</div>
+
+      <h3>Print Service</h3>
+
+      <p>
+        Documents को print करने के लिए तैयार करें।
+      </p>
+
+      <button class="service-btn"
+        onclick="serviceMessage('Print Service')">
+        Open
+      </button>
+
+    </div>
+
+
+    <div class="service-card">
+
+      <div class="service-icon">📑</div>
+
+      <h3>Certificate</h3>
+
+      <p>
+        Certificate format तैयार करें।
+      </p>
+
+      <button class="service-btn"
+        onclick="openDocument()">
+        Create
+      </button>
+
+    </div>
+
+
+    <div class="service-card">
+
+      <div class="service-icon">🗂️</div>
+
+      <h3>Other Services</h3>
+
+      <p>
+        आवेदन, शपथ-पत्र आदि सामान्य formats.
+      </p>
+
+      <button class="service-btn"
+        onclick="openDocument()">
+        Open
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- DOCUMENT MAKER -->
+<section id="documents" class="page">
+
+  <h1 class="page-title">
+    Document Maker
+  </h1>
+
+  <p class="page-subtitle">
+    Document या Aadhaar Details / Reference Print तैयार करें।
+  </p>
+
+
+  <div class="document-box">
+
+    <div class="form-group">
+
+      <label>Document Type</label>
+
+      <select id="documentType"
+        onchange="documentTypeChanged()">
+
+        <option value="general">
+          सामान्य Document
+        </option>
+
+        <option value="aadhaar">
+          Aadhaar Details / Reference Print
+        </option>
+
+        <option value="application">
+          आवेदन पत्र
+        </option>
+
+        <option value="affidavit">
+          शपथ-पत्र
+        </option>
+
+        <option value="income">
+          Income Certificate Format
+        </option>
+
+        <option value="residence">
+          Residence Certificate Format
+        </option>
+
+        <option value="character">
+          Character Certificate Format
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- NORMAL DOCUMENT -->
+    <div id="normalDocument">
+
+      <div class="doc-grid">
+
+        <div class="form-group">
+          <label>Document Title</label>
+          <input id="docTitle"
+            placeholder="उदाहरण: आवेदन पत्र">
+        </div>
+
+        <div class="form-group">
+          <label>Name</label>
+          <input id="docName"
+            placeholder="पूरा नाम">
+        </div>
+
+        <div class="form-group">
+          <label>Father / Husband Name</label>
+          <input id="docFather"
+            placeholder="नाम">
+        </div>
+
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="docDate">
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Document Content</label>
+
+        <textarea id="docContent"
+          placeholder="यहाँ document का पूरा content लिखें..."></textarea>
+
+      </div>
+
+
+      <div class="action-buttons">
+
+        <button class="primary"
+          onclick="previewDocument()">
+          👁️ Preview
+        </button>
+
+        <button class="secondary"
+          onclick="printDocument()">
+          🖨️ Print
+        </button>
+
+        <button class="secondary"
+          onclick="clearDocument()">
+          🔄 Reset
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- AADHAAR REFERENCE FORM -->
+    <div id="aadhaarForm" style="display:none">
+
+      <div class="ref-warning">
+        ⚠️ यह केवल Aadhaar विवरण / Reference Print है।
+        यह Official Aadhaar Card अथवा पहचान-पत्र नहीं है।
+      </div>
+
+
+      <div class="doc-grid">
+
+        <div class="form-group">
+
+          <label>12 Digit Aadhaar Number</label>
+
+          <input
+            id="aadhaarNumber"
+            inputmode="numeric"
+            maxlength="14"
+            placeholder="XXXX XXXX XXXX"
+            oninput="formatAadhaar(this)">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Name</label>
+
+          <input
+            id="aadhaarName"
+            placeholder="पूरा नाम">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Date of Birth</label>
+
+          <input
+            type="date"
+            id="aadhaarDob">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Gender</label>
+
+          <select id="aadhaarGender">
+
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Mobile Number</label>
+
+          <input
+            id="aadhaarMobile"
+            inputmode="numeric"
+            maxlength="10"
+            placeholder="10 digit mobile">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Reference / Date</label>
+
+          <input
+            type="date"
+            id="aadhaarDate">
+
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Address</label>
+
+        <textarea
+          id="aadhaarAddress"
+          placeholder="पूरा पता लिखें..."></textarea>
+
+      </div>
+
+
+    }
 
 .login-btn{
 width:100%;
