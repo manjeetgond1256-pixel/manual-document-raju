@@ -1,114 +1,900 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <meta name="description" content="Mohanlal Print Portal AI Models">
+  <title>Mohanlal Print Portal - Models</title>
 
-<title>My Service Portal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+    :root {
+      --bg: #050505;
+      --sidebar: #080808;
+      --panel: #0b0b0b;
+      --panel-hover: #151515;
+      --border: #252525;
+      --text: #f5f5f5;
+      --muted: #858585;
+      --green: #20c997;
+    }
 
-body{
-  font-family:Arial,"Noto Sans Devanagari",sans-serif;
-  background:#f3f6fb;
-  color:#1f2937;
-}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
 
-/* ================= LOGIN ================= */
+    /* ================= SIDEBAR ================= */
 
-#loginPage{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:linear-gradient(135deg,#0757b8,#1680df);
-}
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 235px;
+      height: 100vh;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      padding: 20px 12px;
+      z-index: 1000;
+      transition: transform .25s ease;
+    }
 
-.login-box{
-  width:100%;
-  max-width:400px;
-  background:#fff;
-  padding:32px 25px;
-  border-radius:20px;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
-}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 8px 22px;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: .5px;
+    }
 
-.logo{
-  width:70px;
-  height:70px;
-  margin:auto;
-  border-radius:50%;
-  background:#0757b8;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:27px;
-  font-weight:bold;
-}
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #4f8cff, #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
 
-.login-box h1{
-  text-align:center;
-  color:#0757b8;
-  margin-top:15px;
-  font-size:25px;
-}
+    .search-box {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      padding: 0 11px;
+      background: #111;
+      border: 1px solid #272727;
+      border-radius: 8px;
+      color: #777;
+      margin-bottom: 14px;
+    }
 
-.login-box p{
-  text-align:center;
-  color:#777;
-  margin:8px 0 25px;
-}
+    .search-box input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: white;
+      margin-left: 8px;
+      font-size: 13px;
+    }
 
-.form-group{
-  margin-bottom:16px;
-}
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      font-size: 13px;
+    }
 
-.form-group label{
-  display:block;
-  font-weight:bold;
-  margin-bottom:7px;
-  font-size:14px;
-}
+    .user:hover {
+      background: #151515;
+    }
 
-input,
-select,
-textarea{
-  width:100%;
-  padding:12px;
-  border:1px solid #d5dce5;
-  border-radius:8px;
-  font-size:15px;
-  outline:none;
-  background:#fff;
-}
+    .avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+    }
 
-input:focus,
-select:focus,
-textarea:focus{
-  border-color:#0757b8;
-  box-shadow:0 0 0 2px rgba(7,87,184,.08);
-}
+    .menu-title {
+      color: #666;
+      font-size: 10px;
+      text-transform: uppercase;
+      padding: 0 10px 8px;
+      letter-spacing: 1px;
+    }
 
-.login-btn{
-  width:100%;
-  border:0;
-  padding:14px;
-  border-radius:8px;
-  background:#0757b8;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-}
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 11px 10px;
+      border-radius: 8px;
+      color: #aaa;
+      font-size: 13px;
+      cursor: pointer;
+      margin-bottom: 2px;
+      transition: .2s;
+    }
 
-.login-btn:hover{
+    .menu-item:hover,
+    .menu-item.active {
+      background: #202020;
+      color: white;
+    }
+
+    /* ================= MOBILE HEADER ================= */
+
+    .mobile-header {
+      display: none;
+      height: 58px;
+      background: #080808;
+      border-bottom: 1px solid #222;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+    }
+
+    .mobile-logo {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .menu-button {
+      width: 38px;
+      height: 36px;
+      border: 1px solid #333;
+      border-radius: 7px;
+      background: #111;
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    /* ================= MAIN ================= */
+
+    .main {
+      margin-left: 235px;
+      min-height: 100vh;
+      padding: 55px 26px;
+    }
+
+    .content {
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    .heading {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+
+    /* ================= ACTION BAR ================= */
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      border: 1px solid #292929;
+      background: #111;
+      color: #ddd;
+      padding: 10px 14px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      background: #202020;
+      border-color: #444;
+    }
+
+    .btn.primary {
+      background: white;
+      color: black;
+      border-color: white;
+      font-weight: 600;
+    }
+
+    .btn.primary:hover {
+      background: #ddd;
+    }
+
+    .model-search {
+      margin-left: auto;
+      width: 260px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      padding: 0 11px;
+      background: #0e0e0e;
+      border: 1px solid #292929;
+      border-radius: 7px;
+      color: #777;
+    }
+
+    .model-search input {
+      width: 100%;
+      margin-left: 8px;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: white;
+      font-size: 12px;
+    }
+
+    /* ================= TABLE ================= */
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      background: #090909;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 900px;
+      border-collapse: collapse;
+    }
+
+    th {
+      padding: 13px 10px;
+      text-align: left;
+      color: #666;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      white-space: nowrap;
+      border-bottom: 1px solid #242424;
+    }
+
+    td {
+      padding: 13px 10px;
+      color: #aaa;
+      font-size: 11px;
+      white-space: nowrap;
+      border-bottom: 1px solid #1b1b1b;
+    }
+
+    tbody tr {
+      transition: .15s;
+    }
+
+    tbody tr:hover {
+      background: #141414;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .model-name {
+      color: #eee;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .model-id {
+      color: #666;
+      font-size: 9px;
+      margin-top: 4px;
+    }
+
+    .free {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* ================= MODAL ================= */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.78);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 520px;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.6);
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    .modal-text {
+      color: #999;
+      font-size: 13px;
+      line-height: 1.7;
+      background: #080808;
+      border: 1px solid #292929;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .modal-code {
+      width: 100%;
+      min-height: 210px;
+      resize: vertical;
+      background: #070707;
+      color: #ddd;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 13px;
+      outline: none;
+      font-family: monospace;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    /* ================= TOAST ================= */
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: white;
+      color: black;
+      padding: 12px 17px;
+      border-radius: 8px;
+      font-size: 12px;
+      display: none;
+      z-index: 3000;
+      box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 800px) {
+
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .mobile-header {
+        display: flex;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 25px 12px;
+      }
+
+      .heading {
+        font-size: 23px;
+      }
+
+      .subtitle {
+        line-height: 1.5;
+      }
+
+      .actions {
+        flex-wrap: wrap;
+      }
+
+      .model-search {
+        width: 100%;
+        margin-left: 0;
+        order: 3;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MOBILE HEADER -->
+
+  <header class="mobile-header">
+    <div class="mobile-logo">
+      ✦ Mohanlal Print Portal
+    </div>
+
+    <button class="menu-button" onclick="toggleSidebar()">
+      ☰
+    </button>
+  </header>
+
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+      <div class="logo-icon">M</div>
+      <span>MOHANLAL PRINT</span>
+    </div>
+
+    <div class="search-box">
+      🔍
+      <input
+        type="text"
+        id="sideSearch"
+        placeholder="Search"
+      >
+    </div>
+
+    <div class="user">
+      <div class="avatar">M</div>
+      <span>Manjeet Gond</span>
+    </div>
+
+    <div class="menu-title">
+      Monitor
+    </div>
+
+    <div class="menu-item"
+         onclick="showToast('Usage section')">
+      ◌
+      <span>Usage</span>
+    </div>
+
+    <div class="menu-item active">
+      ◈
+      <span>Models</span>
+    </div>
+
+    <div class="menu-item"
+         onclick="showToast('API Keys section')">
+      ⚿
+      <span>API Keys</span>
+    </div>
+
+    <div class="menu-item"
+         onclick="showToast('Settings section')">
+      ⚙
+      <span>Settings</span>
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+    <div class="content">
+
+      <h1 class="heading">
+        Models
+      </h1>
+
+      <p class="subtitle">
+        Browse available AI models with their context windows and pricing.
+      </p>
+
+
+      <!-- ACTIONS -->
+
+      <div class="actions">
+
+        <button
+          class="btn primary"
+          onclick="openModal('apiModal')">
+          GET AN API KEY
+        </button>
+
+        <button
+          class="btn"
+          onclick="openModal('snippetModal')">
+          GET CODE SNIPPET
+        </button>
+
+        <div class="model-search">
+          🔍
+          <input
+            type="text"
+            id="modelSearch"
+            placeholder="Search model..."
+            oninput="searchModels()">
+        </div>
+
+      </div>
+
+
+      <!-- MODEL TABLE -->
+
+      <div class="table-container">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Context</th>
+              <th>Max Output</th>
+              <th>Input</th>
+              <th>Output</th>
+              <th>Cache Read</th>
+              <th>Cache Write</th>
+            </tr>
+          </thead>
+
+          <tbody id="modelTable">
+
+            <tr>
+              <td>
+                <div class="model-name">GPT 5.6 Luna</div>
+                <div class="model-id">openai/gpt-5.6-luna</div>
+              </td>
+              <td>1.1M</td>
+              <td>128K</td>
+              <td>$0.20/M</td>
+              <td>$1.20/M</td>
+              <td>$0.02/M</td>
+              <td>$0.25/M</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">GPT 5.6 Luna (Fast)</div>
+                <div class="model-id">openai/gpt-5.6-luna-fast</div>
+              </td>
+              <td>1.1M</td>
+              <td>128K</td>
+              <td>$0.40/M</td>
+              <td>$2.40/M</td>
+              <td>$0.04/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Claude Opus 5</div>
+                <div class="model-id">anthropic/claude-opus-5</div>
+              </td>
+              <td>1M</td>
+              <td>128K</td>
+              <td>$5.00/M</td>
+              <td>$25.00/M</td>
+              <td>$0.50/M</td>
+              <td>$6.25/M</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Claude Opus 5 (Fast)</div>
+                <div class="model-id">anthropic/claude-opus-5-fast</div>
+              </td>
+              <td>1M</td>
+              <td>128K</td>
+              <td>$10.00/M</td>
+              <td>$50.00/M</td>
+              <td>$1.00/M</td>
+              <td>$12.50/M</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Gemini 3.7 Flash</div>
+                <div class="model-id">google/gemini-3.7-flash</div>
+              </td>
+              <td>1M</td>
+              <td>66K</td>
+              <td>$0.75/M</td>
+              <td>$3.75/M</td>
+              <td>$0.07/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Gemini 3.6 Flash</div>
+                <div class="model-id">google/gemini-3.6-flash</div>
+              </td>
+              <td>1M</td>
+              <td>64K</td>
+              <td>$0.75/M</td>
+              <td>$3.75/M</td>
+              <td>$0.07/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Gemini 3.5 Flash Lite</div>
+                <div class="model-id">google/gemini-3.5-flash-lite</div>
+              </td>
+              <td>1M</td>
+              <td>65K</td>
+              <td>$0.30/M</td>
+              <td>$2.50/M</td>
+              <td>$0.03/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">DeepSeek V4 Pro 0813</div>
+                <div class="model-id">deepseek/deepseek-v4-pro-0813</div>
+              </td>
+              <td>1M</td>
+              <td>384K</td>
+              <td>$1.32/M</td>
+              <td>$3.96/M</td>
+              <td>$0.13/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Qwen3.8 27B</div>
+                <div class="model-id">alibaba/qwen3.8-27b</div>
+              </td>
+              <td>262K</td>
+              <td>262K</td>
+              <td>$0.10/M</td>
+              <td>$0.40/M</td>
+              <td>$0.01/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Qwen 3.8 Max</div>
+                <div class="model-id">alibaba/qwen3.8-max</div>
+              </td>
+              <td>1M</td>
+              <td>128K</td>
+              <td>$2.00/M</td>
+              <td>$6.00/M</td>
+              <td>$0.25/M</td>
+              <td>$2.50/M</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Qwen 3.7 Flash</div>
+                <div class="model-id">alibaba/qwen3.7-flash</div>
+              </td>
+              <td>991K</td>
+              <td>64K</td>
+              <td>$0.03/M</td>
+              <td>$0.13/M</td>
+              <td>$0.006/M</td>
+              <td>$0.04/M</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Kimi K3 Fast</div>
+                <div class="model-id">moonshot/kimi-k3-fast</div>
+              </td>
+              <td>1M</td>
+              <td>131K</td>
+              <td>$4.50/M</td>
+              <td>$22.50/M</td>
+              <td>$0.45/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Kimi K3</div>
+                <div class="model-id">moonshot/kimi-k3</div>
+              </td>
+              <td>1M</td>
+              <td>131K</td>
+              <td>$3.00/M</td>
+              <td>$15.00/M</td>
+              <td>$0.30/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Muse Spark 1.2</div>
+                <div class="model-id">meta/muse-spark-1.2</div>
+              </td>
+              <td>1M</td>
+              <td>1M</td>
+              <td>$1.25/M</td>
+              <td>$4.25/M</td>
+              <td>$0.15/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Muse Spark 1.2 Contributor</div>
+                <div class="model-id">meta/muse-spark-1.2-contributor</div>
+              </td>
+              <td>1M</td>
+              <td>1M</td>
+              <td>$0.10/M</td>
+              <td>$0.20/M</td>
+              <td>$0.002/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Laguna S2.1 Free</div>
+                <div class="model-id">poolside/laguna-s2.1-free</div>
+              </td>
+              <td>256K</td>
+              <td>33K</td>
+              <td class="free">Free</td>
+              <td class="free">Free</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Laguna S2.1</div>
+                <div class="model-id">poolside/laguna-s2.1</div>
+              </td>
+              <td>1M</td>
+              <td>131K</td>
+              <td>$0.10/M</td>
+              <td>$0.20/M</td>
+              <td>$0.01/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">InklIing Small</div>
+                <div class="model-id">thinkingmachines/inkling-small</div>
+              </td>
+              <td>1M</td>
+              <td>1M</td>
+              <td>$0.50/M</td>
+              <td>$1.20/M</td>
+              <td>$0.10/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">InklIing</div>
+                <div class="model-id">thinkingmachines/inkling</div>
+              </td>
+              <td>256K</td>
+              <td>256K</td>
+              <td>$1.00/M</td>
+              <td>$4.05/M</td>
+              <td>$0.17/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Lingo 3.0 Flash</div>
+                <div class="model-id">inclusionai/lingo-3.0-flash</div>
+              </td>
+              <td>256K</td>
+              <td>32K</td>
+              <td>$0.06/M</td>
+              <td>$0.18/M</td>
+              <td>$0.01/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Nemotron 3.5 Lightning 30B</div>
+                <div class="model-id">nvidia/nemotron-3.5-lightning</div>
+              </td>
+              <td>262K</td>
+              <td>131K</td>
+              <td>$0.05/M</td>
+              <td>$0.20/M</td>
+              <td>$0.01/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Muse Glimmer 30B</div>
+                <div class="model-id">meta/muse-glimmer-30b</div>
+              </td>
+              <td>131K</td>
+              <td>131K</td>
+              <td>$0.35/M</td>
+              <td>$1.50/M</td>
+              <td>$0.04/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Grok 4.6</div>
+                <div class="model-id">xai/grok-4.6</div>
+              </td>
+              <td>500K</td>
+              <td>500K</td>
+              <td>$2.00/M</td>
+              <td>$6.00/M</td>
+              <td>$0.50/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Sakana Namazu</div>
+                <div class="model-id">sakana/namazu</div>
+              </td>
+              <td>256K</td>
+              <td>256K</td>
+              <td>$0.95/M</td>
+              <td>$4.00/M</td>
+              <td>$0.15/M</td>
+              <td>—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="model-name">Qw.login-btn:hover{
   background:#064b9d;
 }
 
